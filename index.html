@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ashake Oju-oge — Luxury Wigs</title>
+  <meta name="description" content="Ashake Oju-oge — luxury wigs & hair collections. High quality, handcrafted wigs." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Ashake <span>Oju-oge</span></a>
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamb">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Luxury Wigs & Hair Collections</h1>
+          <p class="sub">Handcrafted with care — natural look, premium feel. Find your signature style.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="shop.html">Shop Collection</a>
+            <a class="btn outline" href="contact.html">Order via WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="dammy-image/hero-placeholder.jpg" alt="Ashake hero placeholder">
+        </div>
+      </div>
+    </section>
+
+    <section class="featured container">
+      <h2>Featured Wigs</h2>
+      <p class="lead">A small selection — click any item to view details and order.</p>
+      <div id="featured-grid" class="product-grid"></div>
+      <div class="center"><a class="btn primary" href="shop.html">View All</a></div>
+    </section>
+
+    <section class="why container">
+      <h2>Why Choose Ashake Oju-oge</h2>
+      <div class="why-grid">
+        <div class="card">
+          <h3>Premium Quality</h3>
+          <p>We use top-grade fibers and expert craftsmanship for a natural finish.</p>
+        </div>
+        <div class="card">
+          <h3>Comfort Fit</h3>
+          <p>Adjustable caps and breathable designs for all-day comfort.</p>
+        </div>
+        <div class="card">
+          <h3>Personalized Support</h3>
+          <p>Quick WhatsApp ordering and styling advice.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo small">Ashake <span>Oju-oge</span></div>
+        <p class="muted">Luxury wigs & hair collections — handcrafted for confidence.</p>
+      </div>
+      <div class="socials">
+        <!-- Replace # with your links -->
+        <a href="#" aria-label="WhatsApp" class="social">W</a>
+        <a href="#" aria-label="Facebook" class="social">f</a>
+        <a href="#" aria-label="Instagram" class="social">@</a>
+        <a href="#" aria-label="TikTok" class="social">t</a>
+        <a href="#" aria-label="Snapchat" class="social">s</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2025 Ashake Oju-oge. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Shared Product Modal -->
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-wrap">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="Product image">
+        <div class="modal-info">
+          <h3 id="modalTitle">Product</h3>
+          <p id="modalPrice" class="price">₦0</p>
+          <p id="modalDesc">Description</p>
+          <div class="modal-actions">
+            <!-- Replace YOUR_NUMBER with your WhatsApp number (no +) -->
+            <a id="modalWhatsApp" class="btn primary" href="#" target="_blank" rel="noopener">Order on WhatsApp</a>
+            <button class="btn outline" id="modalCloseBtn">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+
+</html>
