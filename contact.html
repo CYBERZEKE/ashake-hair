@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact · Ashake Oju-oge</title>
+  <meta name="description"
+    content="Contact Ashake Hairmpire for custom wig orders, inquiries, and customer support. Reach us via WhatsApp, email, or Instagram." />
+  <title>Contact · Ashake Hairmpire</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
+
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a class="logo" href="index.html">Ashake <span class="brand-strong">Oju-oge</span></a>
+      <a class="logo" href="index.html">Ashake <span class="brand-strong">Hairmpire</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
@@ -27,58 +36,113 @@
 
       <div class="contact-grid">
         <div class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
           <h4>WhatsApp</h4>
-          <p><a href="https://wa.me/2348169927542?text=Hello%20Ashake%20I%20would%20like%20to%20ask%20about%20your%20wigs" target="_blank" rel="noopener">+234 904 298 8669</a></p>
+          <p><a
+              href="https://wa.me/2349042988669?text=Hello%20Ashake%20Hairmpire%2C%20I%20would%20like%20to%20ask%20about%20your%20wigs"
+              target="_blank" rel="noopener">+234 904 298 8669</a></p>
         </div>
+
         <div class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </div>
           <h4>Email</h4>
-          <p><a href="mailto:hello@ashakeojuoge.example">hello@ashakeojuoge.example</a></p>
+          <p><a href="mailto:hello@ashakehairmpire.com">hello@ashakehairmpire.com</a></p>
         </div>
-        </div>
+
         <div class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
           <h4>Instagram</h4>
-          <p><a href="mailto:hello@ashakeojuoge.example">hello@ashakeojuoge.example</a></p>
+          <p><a href="https://instagram.com/ashakehairmpire" target="_blank" rel="noopener">@ashakehairmpire</a></p>
         </div>
+
         <div class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
           <h4>Location</h4>
           <p>Lagos, Nigeria</p>
         </div>
       </div>
 
-      <form class="contact-form" onsubmit="handleContactForm(event)">
-        <label>
-          Your name
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Your email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Message
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-        <button class="btn" type="submit">Send message</button>
-      </form>
+      <div class="form-section">
+        <h3>Send Us a Message</h3>
+        <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+
+        <form class="contact-form" onsubmit="handleContactForm(event)">
+          <label>
+            Your Name
+            <input type="text" name="name" placeholder="Enter your full name" required />
+          </label>
+          <label>
+            Your Email
+            <input type="email" name="email" placeholder="your.email@example.com" required />
+          </label>
+          <label>
+            Phone Number (Optional)
+            <input type="tel" name="phone" placeholder="+234 XXX XXX XXXX" />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+          </label>
+          <button class="btn" type="submit">Send Message via WhatsApp</button>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2025 Ashake Oju-oge | All Rights Reserved</p>
+      <p>&copy; 2025 Ashake Hairmpire | All Rights Reserved</p>
     </div>
   </footer>
 
   <script>
-  function handleContactForm(e){
-    e.preventDefault();
-    const f = e.target;
-    const name = encodeURIComponent(f.name.value);
-    const email = encodeURIComponent(f.email.value);
-    const message = encodeURIComponent(f.message.value);
-    const waLink = 'https://wa.me/2349042988669?text=' + encodeURIComponent(`Contact from ${name} (${email}): ${decodeURIComponent(message)}`);
-    window.open(waLink, '_blank');
-  }
+    function handleContactForm(e) {
+      e.preventDefault();
+      const f = e.target;
+      const name = f.name.value;
+      const email = f.email.value;
+      const phone = f.phone.value;
+      const message = f.message.value;
+
+      let waMessage = `*New Contact Form Submission*\n\n`;
+      waMessage += `*Name:* ${name}\n`;
+      waMessage += `*Email:* ${email}\n`;
+      if (phone) {
+        waMessage += `*Phone:* ${phone}\n`;
+      }
+      waMessage += `\n*Message:*\n${message}`;
+
+      const waLink = 'https://wa.me/2349042988669?text=' + encodeURIComponent(waMessage);
+      window.open(waLink, '_blank');
+
+      // Optional: Reset form after submission
+      f.reset();
+    }
   </script>
 </body>
+
 </html>

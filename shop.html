@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ashake Oju-oge | Shop</title>
+  <meta name="description"
+    content="Shop premium quality wigs from Ashake Hairmpire. Browse our collection of handcrafted wigs with realistic hairlines and natural textures." />
+  <title>Shop · Ashake Hairmpire</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="products.js"></script>
   <script defer src="script.js"></script>
 </head>
+
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a class="logo" href="index.html">Ashake <span class="brand-strong">Oju-oge</span></a>
+      <a class="logo" href="index.html">Ashake <span class="brand-strong">Hairmpire</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="shop.html" class="active">Shop</a></li>
@@ -23,52 +32,206 @@
 
   <main>
     <section class="shop-hero container">
-      <h2>Our Wig Collections</h2>
-      <p>Browse our curated selection of luxury wigs. Click "Order Now" to place your request on WhatsApp.</p>
+      <h1>Our Wig Collection</h1>
+      <p>Discover handcrafted luxury wigs designed to bring out your natural beauty. Each piece is carefully selected
+        for quality, comfort, and style. Click "Order on WhatsApp" to place your order or ask questions.</p>
+
+      <div class="shop-filters">
+        <div class="filter-group">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select" class="filter-select">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="price-filter">Price Range:</label>
+          <select id="price-filter" class="filter-select">
+            <option value="all">All Prices</option>
+            <option value="0-50000">Under ₦50,000</option>
+            <option value="50000-70000">₦50,000 - ₦70,000</option>
+            <option value="70000-100000">Above ₦70,000</option>
+          </select>
+        </div>
+      </div>
     </section>
 
     <section id="productGrid" class="product-grid container" aria-live="polite">
       <!-- products injected by script.js -->
     </section>
-  </main>
 
-  <!-- ⭐ Reviews Section -->
-  <section class="reviews">
-    <h2>Customer Reviews</h2>
-  
-    <div id="reviews-list">
-      <div class="review-card">
-        <p class="review-text">“Absolutely love my wig! The texture feels so natural and I get compliments everywhere I
-          go.”</p>
-        <p class="review-author">— Sarah O.</p>
-        <p class="review-rating">★★★★★</p>
+    <section class="shop-cta container">
+      <div class="cta-box">
+        <h3>Need Help Choosing?</h3>
+        <p>Our team is here to help you find the perfect wig for your style and budget. Chat with us on WhatsApp for
+          personalized recommendations!</p>
+        <a href="https://wa.me/2349042988669?text=Hello%20Ashake%20Hairmpire%2C%20I%20need%20help%20choosing%20a%20wig"
+          target="_blank" rel="noopener" class="btn btn-primary">Chat with Us</a>
       </div>
-    </div>
-  
-    <!-- Review Form -->
-    <div class="review-form">
-      <h3>Leave a Review</h3>
-      <form id="reviewForm">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <textarea id="message" placeholder="Your Review" rows="4" required></textarea>
-        <label for="rating">Rating:</label>
-        <select id="rating" required>
-          <option value="5">★★★★★ (5)</option>
-          <option value="4">★★★★☆ (4)</option>
-          <option value="3">★★★☆☆ (3)</option>
-          <option value="2">★★☆☆☆ (2)</option>
-          <option value="1">★☆☆☆☆ (1)</option>
-        </select>
-        <button type="submit" class="btn-primary">Submit</button>
-      </form>
-    </div>
-  </section>
+    </section>
 
+    <!-- ⭐ Reviews Section -->
+    <section class="reviews container">
+      <h2>What Our Customers Say</h2>
+      <p class="reviews-intro">Real reviews from real customers who love their Ashake Hairmpire wigs.</p>
+
+      <div id="reviews-list" class="reviews-grid">
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <p class="review-text">"Absolutely love my wig! The texture feels so natural and I get compliments everywhere
+            I go. Worth every penny!"</p>
+          <div class="review-author">
+            <strong>Sarah O.</strong>
+            <span>Lagos</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <p class="review-text">"The quality exceeded my expectations. The hairline is so realistic, no one can tell
+            it's a wig. Amazing!"</p>
+          <div class="review-author">
+            <strong>Amaka N.</strong>
+            <span>Abuja</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <p class="review-text">"Customer service was excellent. They helped me choose the right style and delivered
+            quickly. Highly recommend!"</p>
+          <div class="review-author">
+            <strong>Tunde K.</strong>
+            <span>Ibadan</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Form -->
+      <div class="review-form-section">
+        <h3>Share Your Experience</h3>
+        <p>Purchased from us? We'd love to hear about your experience!</p>
+
+        <form id="reviewForm" class="review-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="review-name">Your Name *</label>
+              <input type="text" id="review-name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="review-location">Location (Optional)</label>
+              <input type="text" id="review-location" name="location" placeholder="e.g., Lagos">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-rating">Rating *</label>
+            <div class="rating-select">
+              <select id="review-rating" name="rating" required>
+                <option value="">Select rating</option>
+                <option value="5">★★★★★ Excellent (5)</option>
+                <option value="4">★★★★☆ Very Good (4)</option>
+                <option value="3">★★★☆☆ Good (3)</option>
+                <option value="2">★★☆☆☆ Fair (2)</option>
+                <option value="1">★☆☆☆☆ Poor (1)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-message">Your Review *</label>
+            <textarea id="review-message" name="message" rows="5"
+              placeholder="Tell us about your experience with our wigs..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+
+        <div id="review-success" class="review-success" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <h4>Thank you for your review!</h4>
+          <p>Your feedback helps us continue to provide the best quality wigs and service.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2025 Ashake Oju-oge | All Rights Reserved</p>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Ashake <span class="brand-strong">Hairmpire</span></h3>
+          <p>Premium wigs crafted with care, delivered with excellence.</p>
+        </div>
+        <div class="footer-links-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get in Touch</h4>
+          <p>WhatsApp: <a href="https://wa.me/2349042988669" target="_blank" rel="noopener">+234 904 298 8669</a></p>
+          <p>Email: <a href="mailto:hello@ashakehairmpire.com">hello@ashakehairmpire.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ashake Hairmpire | All Rights Reserved</p>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // Review form handler
+    document.getElementById('reviewForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('review-name').value;
+      const location = document.getElementById('review-location').value;
+      const rating = document.getElementById('review-rating').value;
+      const message = document.getElementById('review-message').value;
+
+      // Create star rating
+      const stars = '★'.repeat(parseInt(rating)) + '☆'.repeat(5 - parseInt(rating));
+
+      // Format WhatsApp message
+      let waMessage = `*New Review Submission*\n\n`;
+      waMessage += `*Name:* ${name}\n`;
+      if (location) {
+        waMessage += `*Location:* ${location}\n`;
+      }
+      waMessage += `*Rating:* ${stars} (${rating}/5)\n\n`;
+      waMessage += `*Review:*\n${message}`;
+
+      // Send to WhatsApp
+      const waLink = 'https://wa.me/2349042988669?text=' + encodeURIComponent(waMessage);
+      window.open(waLink, '_blank');
+
+      // Show success message
+      document.querySelector('.review-form').style.display = 'none';
+      document.getElementById('review-success').style.display = 'block';
+
+      // Reset form
+      this.reset();
+
+      // Hide success and show form again after 5 seconds
+      setTimeout(() => {
+        document.querySelector('.review-form').style.display = 'block';
+        document.getElementById('review-success').style.display = 'none';
+      }, 5000);
+    });
+  </script>
 </body>
+
 </html>
