@@ -13,11 +13,11 @@
 
 :root {
   /* Brand gColors */
-  --primary-color: #ffd700;
-  --primary-dark: #b1c445;
+  --primary-color: #c01171ff;
+  --primary-dark: #8e1443ff;
   --primary-light: #ffa6c1;
   --secondary-color: #b11d4e;
-  --accent-color: #fdcb6e;
+  --accent-color: #f20f66ff;
   
   /* Neutral Colors */
   --text-dark: #2d3436;

@@ -61,13 +61,13 @@ function formatPrice(price) {
 
 // Create WhatsApp order link
 function createWhatsAppLink(product) {
-  const message = `Hello Ashake Hairmpire! I'm interested in ordering:\n\n` +
+  const message = `Hello Asake Hairmpire! I'm interested in ordering:\n\n` +
     `*${product.name}* (${product.sku})\n` +
     `Price: ${formatPrice(product.price)}\n\n` +
     `${product.short}\n\n` +
     `Please send me more details!`;
   
-  return `https://wa.me/2349042988669?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/23481629927542?text=${encodeURIComponent(message)}`;
 }
 
 // Create product card HTML
@@ -157,7 +157,21 @@ function sortProducts(products, sortBy) {
 
 // Initialize shop page
 function initShopPage() {
-  if (typeof PRODUCTS === 'undefined') return;
+  // Check if PRODUCTS is defined
+  if (typeof PRODUCTS === 'undefined') {
+    console.error('PRODUCTS array is not defined. Make sure products.js is loaded before script.js');
+    const productGrid = document.getElementById('productGrid');
+    if (productGrid) {
+      productGrid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+          <p style="font-size: 1.25rem; color: #e74c3c;">
+            Error loading products. Please refresh the page.
+          </p>
+        </div>
+      `;
+    }
+    return;
+  }
 
   const sortSelect = document.getElementById('sort-select');
   const priceFilter = document.getElementById('price-filter');
@@ -285,8 +299,8 @@ function initReviewForm() {
       date: new Date()
     };
     
-    customerReviews.unshift(newReview); // Add to beginning of array
-    renderReviews(); // Re-render all reviews
+    customerReviews.unshift(newReview);
+    renderReviews();
 
     // Show success message
     document.querySelector('.review-form').style.display = 'none';
@@ -330,13 +344,10 @@ function handleContactForm(e) {
   }
   waMessage += `\n*Message:*\n${message}`;
 
-  const waLink = 'https://wa.me/2349042988669?text=' + encodeURIComponent(waMessage);
+  const waLink = 'https://wa.me/23481629927542?text=' + encodeURIComponent(waMessage);
   window.open(waLink, '_blank');
 
-  // Reset form
   form.reset();
-  
-  // Show success message (you can add a success div in HTML)
   alert('Thank you for your message! We will get back to you soon.');
 }
 
@@ -379,7 +390,6 @@ function initScrollAnimations() {
     });
   }, observerOptions);
 
-  // Observe elements that should animate on scroll
   document.querySelectorAll('.feature-card, .testimonial-card, .product-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
@@ -414,6 +424,9 @@ function initHeaderScroll() {
 // INITIALIZE ALL FUNCTIONS ON PAGE LOAD
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM Content Loaded');
+  console.log('PRODUCTS available:', typeof PRODUCTS !== 'undefined');
+  
   // Initialize mobile menu
   initMobileMenu();
   

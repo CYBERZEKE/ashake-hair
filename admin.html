@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Panel · Ashake Hairmpire</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .login-box {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .product-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .product-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .product-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      color: #856404;
+    }
+
+    @media (max-width: 768px) {
+      .product-item {
+        grid-template-columns: 80px 1fr;
+      }
+
+      .product-actions {
+        grid-column: 1 / -1;
+      }
+
+      .admin-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Login Screen -->
+  <div id="loginScreen" class="login-box">
+    <h2 style="text-align: center; margin-bottom: 1.5rem;">Admin Login</h2>
+    <div class="alert" style="background: #f8d7da; border-color: #f5c6cb; color: #721c24; font-size: 0.875rem;">
+      ⚠️ <strong>Security Notice:</strong> Change default credentials in production! Current: admin/ashake2025
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" required />
+      </div>
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+      <p id="loginError" style="color: red; margin-top: 1rem; text-align: center; display: none;"></p>
+    </form>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboard" class="hidden">
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="logo" href="index.html">Ashake <span class="brand-strong">Hairmpire</span></a>
+        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+      </nav>
+    </header>
+
+    <div class="admin-container">
+      <div class="alert">
+        📝 <strong>Important:</strong> After making changes, click "Download products.js" and replace the file on your
+        server to make changes permanent.
+      </div>
+
+      <div class="admin-header">
+        <h1>Product Management</h1>
+        <div class="btn-actions">
+          <button id="downloadBtn" class="btn btn-secondary">⬇ Download products.js</button>
+          <label for="uploadFile" class="btn btn-secondary" style="cursor: pointer; margin: 0;">⬆ Upload JSON</label>
+          <input type="file" id="uploadFile" accept=".json" style="display: none;" />
+          <button id="addProductBtn" class="btn btn-primary">+ Add Product</button>
+        </div>
+      </div>
+
+      <div id="productList" class="product-list"></div>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Product</h3>
+      <form id="productForm">
+        <input type="hidden" id="editIndex" value="-1" />
+
+        <div class="form-group">
+          <label>Product Name *</label>
+          <input type="text" id="productName" required />
+        </div>
+
+        <div class="form-group">
+          <label>Price (₦) *</label>
+          <input type="number" id="productPrice" required />
+        </div>
+
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea id="productDesc" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Image Path *</label>
+          <input type="text" id="productImage" placeholder="dammy-image/wig1.svg" required />
+          <small style="color: #666;">Enter image path (e.g., dammy-image/wig1.svg)</small>
+        </div>
+
+        <div class="form-group">
+          <label>SKU *</label>
+          <input type="text" id="productSku" placeholder="AH-1001" required />
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Save Product</button>
+          <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script>
+    // ADMIN CREDENTIALS - CHANGE THESE IN PRODUCTION!
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'ashake2025';
+
+    let products = [];
+    let sessionAuth = false;
+
+    // Load products from products.js
+    function loadProducts() {
+      if (typeof PRODUCTS !== 'undefined') {
+        products = [...PRODUCTS];
+      }
+      renderProducts();
+    }
+
+    // Render product list
+    function renderProducts() {
+      const list = document.getElementById('productList');
+      if (!products.length) {
+        list.innerHTML = '<p style="text-align:center;color:#999;">No products yet. Click "Add Product" to start.</p>';
+        return;
+      }
+      list.innerHTML = products.map((p, i) => `
+        <div class="product-item">
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23ddd%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
+          <div>
+            <h4>${p.name}</h4>
+            <p style="color: #666; margin: 0.5rem 0;">${p.short}</p>
+            <p style="font-weight: 600; color: #ffd700;">₦${p.price.toLocaleString()}</p>
+            <small style="color: #999;">SKU: ${p.sku}</small>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-small btn-secondary" onclick="editProduct(${i})">Edit</button>
+            <button class="btn btn-small" style="background: #e74c3c; color: white;" onclick="deleteProduct(${i})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Login handler
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        sessionAuth = true;
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        loadProducts();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('loginError').textContent = 'Invalid credentials';
+      }
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionAuth = false;
+      location.reload();
+    });
+
+    // Add product button
+    document.getElementById('addProductBtn').addEventListener('click', () => {
+      document.getElementById('modalTitle').textContent = 'Add New Product';
+      document.getElementById('productForm').reset();
+      document.getElementById('editIndex').value = '-1';
+      document.getElementById('productModal').classList.add('active');
+    });
+
+    // Cancel button
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      document.getElementById('productModal').classList.remove('active');
+    });
+
+    // Save product
+    document.getElementById('productForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const product = {
+        name: document.getElementById('productName').value,
+        price: parseInt(document.getElementById('productPrice').value),
+        short: document.getElementById('productDesc').value,
+        image: document.getElementById('productImage').value,
+        sku: document.getElementById('productSku').value
+      };
+
+      const editIndex = parseInt(document.getElementById('editIndex').value);
+
+      if (editIndex >= 0) {
+        products[editIndex] = product;
+      } else {
+        products.push(product);
+      }
+
+      renderProducts();
+      document.getElementById('productModal').classList.remove('active');
+      alert('✅ Product saved! Remember to download products.js and update your server.');
+    });
+
+    // Edit product
+    window.editProduct = (index) => {
+      const p = products[index];
+      document.getElementById('modalTitle').textContent = 'Edit Product';
+      document.getElementById('editIndex').value = index;
+      document.getElementById('productName').value = p.name;
+      document.getElementById('productPrice').value = p.price;
+      document.getElementById('productDesc').value = p.short;
+      document.getElementById('productImage').value = p.image;
+      document.getElementById('productSku').value = p.sku;
+      document.getElementById('productModal').classList.add('active');
+    };
+
+    // Delete product
+    window.deleteProduct = (index) => {
+      if (confirm('Delete this product?')) {
+        products.splice(index, 1);
+        renderProducts();
+        alert('✅ Product deleted! Remember to download products.js and update your server.');
+      }
+    };
+
+    // Download products.js
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const jsCode = `// products.js - edit product data here. Each product: {name, price, short, image, sku, whatsapp (optional)}\n// Image paths point to the included dammy-image/*.svg placeholders. Replace with real jpg/png when ready.\n\nconst PRODUCTS = ${JSON.stringify(products, null, 2)};`;
+      const blob = new Blob([jsCode], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'products.js';
+      link.click();
+      URL.revokeObjectURL(url);
+      alert('✅ products.js downloaded! Replace the old file on your server with this one.');
+    });
+
+    // Upload JSON
+    document.getElementById('uploadFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const uploaded = JSON.parse(event.target.result);
+          if (Array.isArray(uploaded)) {
+            products = uploaded;
+            renderProducts();
+            alert('✅ Products imported successfully!');
+          } else {
+            alert('❌ Invalid file format.');
+          }
+        } catch (err) {
+          alert('❌ Error reading file: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    // Close modal on outside click
+    document.getElementById('productModal').addEventListener('click', (e) => {
+      if (e.target.id === 'productModal') {
+        document.getElementById('productModal').classList.remove('active');
+      }
+    });
+  </script>
+</body>
+
+</html>
